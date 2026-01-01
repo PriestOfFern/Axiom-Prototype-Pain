@@ -92,6 +92,7 @@ sourceSets.main.configure { resources.srcDirs("src/generated/resources/") }
 
 repositories {
     mavenCentral()
+    maven("https://jitpack.io") // MixinExtras is often hosted here or via LLibrary
     maven {
         name = "Kotlin for Forge"
         url = uri("https://thedarkcolour.github.io/KotlinForForge/")
@@ -123,6 +124,10 @@ dependencies {
     implementation(fg.deobf("maven.modrinth:prototype-pain:2.7.2"))
     implementation(fg.deobf("maven.modrinth:tough-as-nails:9.2.0.171-forge"))
     implementation(fg.deobf("maven.modrinth:glitchcore:0.0.1.1-forge"))
+    implementation("io.github.llamalad7:mixinextras-common:0.5.2")
+    annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.2")
+    implementation("io.github.llamalad7:mixinextras-forge:0.5.2")
+
 }
 
 val Project.mixin: MixinExtension

@@ -3,9 +3,12 @@
   "minVersion": "0.8",
   "package": "com.axiom.axiom_pain.mixin",
   "compatibilityLevel": "JAVA_17",
-  "mixins": [],
+  "mixins": [
+    "temperature.PlayerHealthDataMixin"
+  ],
   "client": [
-    "temperature.HealthScreenMixin"
+    "temperature.HealthScreenMixin",
+    "temperature.TemperatureMoodleMixin"
   ],
   "injectors": {
     "defaultRequire": 1

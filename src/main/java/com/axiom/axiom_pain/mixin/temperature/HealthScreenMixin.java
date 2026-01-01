@@ -18,7 +18,7 @@ public class HealthScreenMixin {
     @Shadow
     private HealthInfoBoxWidget healthbox;
 
-    @Inject(method = "tick", at = @At("RETURN"))
+    @Inject(method = "tick", at = @At("RETURN"), remap = false)
     public void tick(CallbackInfo ci) {
         Player viewer = Minecraft.getInstance().player;
         float temperature = AxiomTemperatureHelper.INSTANCE.levelToTemp(TemperatureHelper.getTemperatureForPlayer(viewer));
