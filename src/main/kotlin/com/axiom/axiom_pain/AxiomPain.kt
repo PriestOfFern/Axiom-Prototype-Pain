@@ -5,6 +5,7 @@ import com.axiom.axiom_pain.init.AxiomParticleTypes
 import com.axiom.axiom_pain.init.AxiomParticles
 import com.axiom.axiom_pain.init.ItemRegistry
 import com.axiom.axiom_pain.keybind.KeyBindHandler.registerKeybindings
+import com.axiom.axiom_pain.moodles.AxiomMoodleController
 import net.adinvas.prototype_pain.item.multi_tank.MultiTankFluidItem
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.ItemStack
@@ -39,6 +40,7 @@ object AxiomPain {
         AxiomMedicalFluids.register(MOD_BUS)
         ItemRegistry.register(MOD_BUS)
         AxiomParticleTypes.register(MOD_BUS)
+        AxiomMoodleController.register()
 
     }
 

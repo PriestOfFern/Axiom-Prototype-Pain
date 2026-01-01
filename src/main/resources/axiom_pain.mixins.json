@@ -6,6 +6,8 @@
   "mixins": [
     "balance.BoneWeldingItemMixin",
     "balance.PlayerHealthDataMixin",
+    "robot.BruiseKitItemMixin",
+    "robot.DirtynessMoodleMixin",
     "robot.PlayerHealthDataMixin",
     "temperature.PlayerHealthDataMixin",
     "temperature.TemperatureHandlerMixin",
