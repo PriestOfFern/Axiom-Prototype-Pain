@@ -1,4 +1,4 @@
-package com.pleahmacaka.examplemod.keybind
+package com.axiom.axiom_pain.keybind
 
 import com.mojang.blaze3d.platform.InputConstants
 import net.minecraft.client.KeyMapping

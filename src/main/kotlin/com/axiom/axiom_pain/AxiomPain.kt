@@ -1,9 +1,10 @@
-package com.pleahmacaka.examplemod
+package com.axiom.axiom_pain
 
-import com.pleahmacaka.examplemod.keybind.KeyBindHandler.registerKeybindings
-import net.minecraftforge.client.event.EntityRenderersEvent
+import com.axiom.axiom_pain.keybind.KeyBindHandler.registerKeybindings
 import net.minecraftforge.event.TickEvent
+import net.minecraftforge.fml.ModLoadingContext
 import net.minecraftforge.fml.common.Mod
+import net.minecraftforge.fml.config.ModConfig
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 import org.apache.logging.log4j.Level
 import org.apache.logging.log4j.LogManager
@@ -23,6 +24,7 @@ object AxiomPain {
 
         MOD_BUS.addListener(::onClientSetup)
         FORGE_BUS.addListener(::onClientTick)
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, AxiomPainConfig.SPEC);
     }
 
     @Suppress("UNUSED_PARAMETER")

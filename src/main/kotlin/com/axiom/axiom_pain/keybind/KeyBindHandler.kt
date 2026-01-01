@@ -1,8 +1,8 @@
-package com.pleahmacaka.examplemod.keybind
+package com.axiom.axiom_pain.keybind
 
-import com.pleahmacaka.examplemod.keybind.KeyBinds.KB_EXAMPLE_KEYBIND_ONE
-import com.pleahmacaka.examplemod.keybind.KeyBinds.KB_EXAMPLE_KEYBIND_TWO
-import com.pleahmacaka.examplemod.keybind.KeyBinds.KEYBINDINGS
+import com.axiom.axiom_pain.keybind.KeyBinds.KB_EXAMPLE_KEYBIND_ONE
+import com.axiom.axiom_pain.keybind.KeyBinds.KB_EXAMPLE_KEYBIND_TWO
+import com.axiom.axiom_pain.keybind.KeyBinds.KEYBINDINGS
 import net.minecraft.client.KeyMapping
 import net.minecraft.client.Minecraft
 import net.minecraft.client.player.LocalPlayer

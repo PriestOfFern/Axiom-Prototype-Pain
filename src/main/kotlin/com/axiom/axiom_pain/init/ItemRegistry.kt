@@ -1,8 +1,8 @@
 @file:Suppress("HasPlatformType", "unused")
 
-package com.pleahmacaka.examplemod.init
+package com.axiom.axiom_pain.init
 
-import com.pleahmacaka.examplemod.AxiomPain.MODID
+import com.axiom.axiom_pain.AxiomPain.MODID
 import net.minecraft.world.item.Item
 import net.minecraftforge.eventbus.api.IEventBus
 import net.minecraftforge.registries.DeferredRegister

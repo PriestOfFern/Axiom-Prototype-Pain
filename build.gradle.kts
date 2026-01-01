@@ -78,6 +78,7 @@ minecraft {
                 "--mod",
                 modid,
                 "--all",
+
                 "--output",
                 file("src/generated/resources/"),
                 "--existing",
