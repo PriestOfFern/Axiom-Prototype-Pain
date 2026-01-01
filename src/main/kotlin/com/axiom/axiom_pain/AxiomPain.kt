@@ -1,6 +1,14 @@
 package com.axiom.axiom_pain
 
+import com.axiom.axiom_pain.init.AxiomMedicalFluids
+import com.axiom.axiom_pain.init.AxiomParticleTypes
+import com.axiom.axiom_pain.init.AxiomParticles
+import com.axiom.axiom_pain.init.ItemRegistry
 import com.axiom.axiom_pain.keybind.KeyBindHandler.registerKeybindings
+import net.adinvas.prototype_pain.item.multi_tank.MultiTankFluidItem
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.item.ItemStack
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent
 import net.minecraftforge.event.TickEvent
 import net.minecraftforge.fml.ModLoadingContext
 import net.minecraftforge.fml.common.Mod
@@ -24,7 +32,27 @@ object AxiomPain {
 
         MOD_BUS.addListener(::onClientSetup)
         FORGE_BUS.addListener(::onClientTick)
+        MOD_BUS.addListener(::buildContents)
+        MOD_BUS.addListener(AxiomParticles::registerParticles)
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, AxiomPainConfig.SPEC);
+
+        AxiomMedicalFluids.register(MOD_BUS)
+        ItemRegistry.register(MOD_BUS)
+        AxiomParticleTypes.register(MOD_BUS)
+
+    }
+
+    fun buildContents(event: BuildCreativeModeTabContentsEvent) {
+
+        if (event.tabKey.location() == ResourceLocation.fromNamespaceAndPath("prototype_pain", "main")) {
+            ItemRegistry.ITEMS.entries.forEach {
+                val stack: ItemStack = ItemStack(it.get())
+                if (it.get() is MultiTankFluidItem) {
+                    (it.get() as MultiTankFluidItem).setupDefault(stack)
+                }
+                event.accept(stack)
+            }
+        }
     }
 
     @Suppress("UNUSED_PARAMETER")

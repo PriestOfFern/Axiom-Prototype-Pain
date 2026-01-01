@@ -1,6 +1,7 @@
 package com.axiom.axiom_pain
 
 import net.minecraft.client.player.AbstractClientPlayer
+import net.minecraft.world.entity.player.Player
 import net.minecraftforge.common.ForgeConfigSpec
 
 
@@ -22,7 +23,7 @@ object AxiomPainConfig {
         SPEC = BUILDER.build()
     }
 
-    fun isRobot(player: AbstractClientPlayer): Boolean {
+    fun isRobot(player: Player): Boolean {
         val name = player.gameProfile.name
 
 

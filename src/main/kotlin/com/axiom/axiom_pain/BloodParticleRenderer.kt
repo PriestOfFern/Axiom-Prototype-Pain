@@ -1,5 +1,6 @@
 package com.axiom.axiom_pain // Ensure this matches your other files!
 
+import com.axiom.axiom_pain.init.AxiomParticleTypes
 import net.adinvas.prototype_pain.PlayerHealthProvider
 import net.mcreator.bloodbits.init.BloodbitsModParticleTypes
 import net.minecraft.client.Minecraft
@@ -41,7 +42,7 @@ object BloodParticleRenderer {
                 val velocityMult = (bleed * 7500.0).coerceAtMost(1.5)
 
                 val type = if (AxiomPainConfig.isRobot(player)) {
-                    BloodbitsModParticleTypes.NETHER_BLOODSPLASH
+                    AxiomParticleTypes.OILSPASH
                 } else {
                     BloodbitsModParticleTypes.BLOODSPLASH
                 }

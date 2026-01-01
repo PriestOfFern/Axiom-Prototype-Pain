@@ -1,5 +1,6 @@
 package com.axiom.axiom_pain.mixin.temperature;
 
+import com.axiom.axiom_pain.AxiomPainConfig;
 import com.axiom.axiom_pain.AxiomTemperatureHelper;
 import net.adinvas.prototype_pain.client.gui.HealthInfoBoxWidget;
 import net.adinvas.prototype_pain.client.gui.HealthScreen;
@@ -15,7 +16,7 @@ import toughasnails.temperature.TemperatureHelperImpl;
 
 @Mixin(HealthScreen.class)
 public class HealthScreenMixin {
-    @Shadow
+    @Shadow(remap = false)
     private HealthInfoBoxWidget healthbox;
 
     @Inject(method = "tick", at = @At("RETURN"), remap = false)

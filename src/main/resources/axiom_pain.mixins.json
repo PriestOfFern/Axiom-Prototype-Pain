@@ -4,7 +4,12 @@
   "package": "com.axiom.axiom_pain.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "temperature.PlayerHealthDataMixin"
+    "balance.BoneWeldingItemMixin",
+    "balance.PlayerHealthDataMixin",
+    "robot.PlayerHealthDataMixin",
+    "temperature.PlayerHealthDataMixin",
+    "temperature.TemperatureHandlerMixin",
+    "temperature.TemperatureHelperImplMixin"
   ],
   "client": [
     "temperature.HealthScreenMixin",
