@@ -121,15 +121,16 @@ dependencies {
     implementation("thedarkcolour:kotlinforforge:4.12.0")
     implementation(fg.deobf("curse.maven:blood-bits-984445:7353388"))
     implementation(fg.deobf("maven.modrinth:prototype-pain:2.7.2"))
-
+    implementation(fg.deobf("maven.modrinth:tough-as-nails:9.2.0.171-forge"))
+    implementation(fg.deobf("maven.modrinth:glitchcore:0.0.1.1-forge"))
 }
 
 val Project.mixin: MixinExtension
     get() = extensions.getByType()
 
 mixin.run {
-    add(sourceSets.main.get(), "examplemod.mixins.refmap.json")
-    config("examplemod.mixins.json")
+    add(sourceSets.main.get(), "axiom_pain.mixins.refmap.json")
+    config("axiom_pain.mixins.json")
     val debug = this.debug as DynamicProperties
     debug.setProperty("verbose", true)
     debug.setProperty("export", true)

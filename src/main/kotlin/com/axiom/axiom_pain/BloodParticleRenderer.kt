@@ -1,4 +1,4 @@
-package com.axiom.axiom_pain
+package com.axiom.axiom_pain // Ensure this matches your other files!
 
 import net.adinvas.prototype_pain.PlayerHealthProvider
 import net.mcreator.bloodbits.init.BloodbitsModParticleTypes
@@ -8,6 +8,9 @@ import kotlin.random.Random
 
 object BloodParticleRenderer {
     fun tick(event: TickEvent.ClientTickEvent) {
+        // Only run on the start of the tick to avoid double-processing
+        //if (event.phase != TickEvent.Phase.START) return
+
         val level = Minecraft.getInstance().level ?: return
         if (Minecraft.getInstance().isPaused) return
         val players = level.players() ?: return
@@ -19,17 +22,43 @@ object BloodParticleRenderer {
             val data = dataCapability.orElseThrow { AssertionError() }
             val bleed = data.combinedBleed
 
-            if (bleed == 0f) continue
-            val amount = (bleed / 0.0001).toInt()
+            if (bleed <= 0f) continue
 
-            val strength = bleed / 0.005
+            // --- SPURT LOGIC ---
 
-            val type = if (AxiomPainConfig.isRobot(player)) BloodbitsModParticleTypes.NETHER_BLOODSPLASH else BloodbitsModParticleTypes.BLOODSPLASH
+            // 1. Frequency: How often do we spurt?
+            // Higher bleed = higher chance per tick.
+            // Example: at 0.01 bleed, chance is 0.1 (10% chance per tick)
+            val spurtChance = (bleed * 100.0).coerceAtMost(0.5)
 
-            for (i in 1..amount) {
-                level.addParticle(type.get(), player.x+Random.nextDouble(-0.15,0.15), player.y+1+Random.nextDouble(-0.15,0.5), player.z+Random.nextDouble(-0.15,0.15), Random.nextDouble(-0.15,0.15)+player.deltaMovement.x, Random.nextDouble(0.5*strength,1*strength)+player.deltaMovement.y, Random.nextDouble(-0.15,0.15)+player.deltaMovement.z)
+            if (Random.nextDouble() < spurtChance) {
+
+                // 2. Quantity: How many particles in this specific spurt?
+                // Higher bleed = more particles.
+                val amount = (bleed * 25000).toInt().coerceIn(3, 50)
+
+                // 3. Intensity: How fast do they spray?
+                val velocityMult = (bleed * 7500.0).coerceAtMost(1.5)
+
+                val type = if (AxiomPainConfig.isRobot(player)) {
+                    BloodbitsModParticleTypes.NETHER_BLOODSPLASH
+                } else {
+                    BloodbitsModParticleTypes.BLOODSPLASH
+                }
+
+                for (i in 1..amount) {
+                    level.addParticle(
+                        type.get(),
+                        player.x + Random.nextDouble(-0.1, 0.1),
+                        player.y + 1.0 + Random.nextDouble(-0.2, 0.2),
+                        player.z + Random.nextDouble(-0.1, 0.1),
+                        // Movement math: adds player momentum + random spray + intensity
+                        (Random.nextDouble(-0.1, 0.1) * velocityMult) + player.deltaMovement.x,
+                        (Random.nextDouble(0.1, 0.3) * velocityMult) + player.deltaMovement.y,
+                        (Random.nextDouble(-0.1, 0.1) * velocityMult) + player.deltaMovement.z
+                    )
+                }
             }
-
         }
     }
 }
