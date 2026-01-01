@@ -2,14 +2,12 @@
 
 package com.pleahmacaka.examplemod.init
 
-import com.pleahmacaka.examplemod.MODID
-import com.pleahmacaka.examplemod.blocks.ExampleBlock
-import net.minecraft.world.item.BlockItem
+
+import com.pleahmacaka.examplemod.AxiomPain.MODID
 import net.minecraft.world.item.Item
 import net.minecraftforge.eventbus.api.IEventBus
 import net.minecraftforge.registries.DeferredRegister
 import net.minecraftforge.registries.ForgeRegistries
-import thedarkcolour.kotlinforforge.forge.registerObject
 
 object BlockItemRegistry {
 
@@ -21,7 +19,6 @@ object BlockItemRegistry {
     //      Block Items     //
     // ==================== //
 
-    val EXAMPLE_BLOCK: BlockItem
-            by BLOCK_ITEMS.registerObject("example_block") { BlockItem(ExampleBlock, Item.Properties()) }
+
 
 }

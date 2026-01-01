@@ -2,8 +2,7 @@
 
 package com.pleahmacaka.examplemod.init
 
-import com.pleahmacaka.examplemod.MODID
-import com.pleahmacaka.examplemod.blocks.ExampleBlock
+import com.pleahmacaka.examplemod.AxiomPain.MODID
 import net.minecraft.world.level.block.Block
 import net.minecraftforge.eventbus.api.IEventBus
 import net.minecraftforge.registries.DeferredRegister
@@ -15,7 +14,5 @@ object BlockRegistry {
 
     fun register(bus: IEventBus) = BLOCKS.register(bus)
 
-    // Example Block
-    val EXAMPLE_BLOCK = BLOCKS.register<Block>("example_block") { ExampleBlock }
 
 }

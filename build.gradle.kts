@@ -9,7 +9,7 @@ buildscript {
         maven("https://maven.fabricmc.net/")
     }
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0-Beta")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.2.21")
         classpath("org.spongepowered:mixingradle:0.7.+")
     }
 }
@@ -22,8 +22,8 @@ plugins {
     idea
     `maven-publish`
     id("net.minecraftforge.gradle") version "[6.0,6.2)"
-    id("org.jetbrains.kotlin.jvm") version "1.8.22"
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.8.22"
+    id("org.jetbrains.kotlin.jvm") version "2.2.21"
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.2.21"
 }
 
 group = "com.axiom"
@@ -67,7 +67,6 @@ minecraft {
     runs.run {
         create("client") {
             property("log4j.configurationFile", "log4j2.xml")
-            jvmArg("-XX:+AllowEnhancedClassRedefinition")
             args("--username", "Player")
         }
 
@@ -102,6 +101,13 @@ repositories {
             includeGroup("curse.maven")
         }
     }
+    maven {
+        url = uri("https://api.modrinth.com/maven")
+        content {
+            includeGroup("maven.modrinth")
+        }
+    }
+
 }
 
 fun getProperty(name: String): String {
@@ -111,8 +117,9 @@ fun getProperty(name: String): String {
 dependencies {
     minecraft("net.minecraftforge:forge:$minecraftVersion-$forgeVersion")
     annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
-    implementation("thedarkcolour:kotlinforforge:4.3.0")
-    implementation(fg.deobf("curse.maven:prototype-pain-1333811:7393939"))
+    implementation("thedarkcolour:kotlinforforge:4.12.0")
+    implementation(fg.deobf("curse.maven:blood-bits-984445:7353388"))
+    implementation(fg.deobf("maven.modrinth:prototype-pain:2.7.2"))
 
 }
 
@@ -163,8 +170,8 @@ tasks.withType<JavaCompile>().configureEach {
     options.encoding = "UTF-8"
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions {
-        jvmTarget = "17"
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
     }
 }

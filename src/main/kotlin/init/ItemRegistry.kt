@@ -2,8 +2,7 @@
 
 package com.pleahmacaka.examplemod.init
 
-import com.pleahmacaka.examplemod.MODID
-import com.pleahmacaka.examplemod.items.SadObsidianMaker
+import com.pleahmacaka.examplemod.AxiomPain.MODID
 import net.minecraft.world.item.Item
 import net.minecraftforge.eventbus.api.IEventBus
 import net.minecraftforge.registries.DeferredRegister
@@ -20,6 +19,5 @@ object ItemRegistry {
     //     Normal Items     //
     // ==================== //
 
-    val SAD_OBSIDIAN_MAKER = ITEMS.register("sad_obsidian_maker") { SadObsidianMaker }
 
 }
