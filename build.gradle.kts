@@ -26,14 +26,14 @@ plugins {
     id("org.jetbrains.kotlin.plugin.serialization") version "1.8.22"
 }
 
-group = "com.pleahmacaka"
+group = "com.axiom"
 version = "1.20-0.1.0"
 
-val modid = "examplemod"
-val vendor = "pleahmacaka"
+val modid = "axiom_pain"
+val vendor = "axiom"
 
-val minecraftVersion = "1.20.2"
-val forgeVersion = "48.0.20"
+val minecraftVersion = "1.20.1"
+val forgeVersion = "47.4.10"
 
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 
@@ -96,6 +96,12 @@ repositories {
         name = "Kotlin for Forge"
         url = uri("https://thedarkcolour.github.io/KotlinForForge/")
     }
+    maven {
+        url = uri("https://cursemaven.com")
+        content {
+            includeGroup("curse.maven")
+        }
+    }
 }
 
 fun getProperty(name: String): String {
@@ -106,6 +112,8 @@ dependencies {
     minecraft("net.minecraftforge:forge:$minecraftVersion-$forgeVersion")
     annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
     implementation("thedarkcolour:kotlinforforge:4.3.0")
+    implementation(fg.deobf("curse.maven:prototype-pain-1333811:7393939"))
+
 }
 
 val Project.mixin: MixinExtension
