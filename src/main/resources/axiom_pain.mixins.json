@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "balance.BoneWeldingItemMixin",
+    "balance.LivingEntityMixin",
     "balance.PlayerHealthDataMixin",
     "robot.BruiseKitItemMixin",
     "robot.DirtynessMoodleMixin",

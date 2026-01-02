@@ -1,14 +1,20 @@
 package com.axiom.axiom_pain.mixin.robot;
 
+import com.axiom.axiom_pain.AxiomPain;
 import com.axiom.axiom_pain.AxiomPainConfig;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalDoubleRef;
 import net.adinvas.prototype_pain.limbs.Limb;
 import net.adinvas.prototype_pain.limbs.LimbStatistics;
 import net.adinvas.prototype_pain.limbs.PlayerHealthData;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -38,12 +44,6 @@ public abstract class PlayerHealthDataMixin {
     @Unique
     private boolean isRobot = false;
 
-    @Shadow(remap = false)
-    public abstract void setLimbSkinHeal(Limb limb, boolean value);
-
-    @Shadow(remap = false)
-    public abstract void setLimbMuscleHeal(Limb limb, boolean value);
-
     @Inject(method = "applyPenalties", at = @At("HEAD"), remap = false)
     void applyPenalties(ServerPlayer player, CallbackInfo ci) {
         if (isRobot)  {
@@ -54,15 +54,26 @@ public abstract class PlayerHealthDataMixin {
         }
     }
 
-    @Inject(method = "applyPenalties", at = @At(value = "INVOKE", target = "Lnet/adinvas/prototype_pain/limbs/Limb;getFromHand(Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/entity/player/Player;)Lnet/minecraft/world/entity/HumanoidArm;"), remap = false)
-    void applyGunk(ServerPlayer player, CallbackInfo ci, @Local(name = "moveReduction") LocalDoubleRef moveReduction) {
-        if (!isRobot) return;
-        System.out.println("GUNK!!!");
+    @WrapMethod(method = "recalculateConsciousness", remap = false)
+    void recalculateConsciousness(Operation<Void> original) {
+        this.totalPain = 0.0;
+        original.call();
+    }
 
-        if (dirtyness > 80) moveReduction.set(moveReduction.get() + 0.2);
-        else if (dirtyness > 60) moveReduction.set(moveReduction.get() + 0.1);
-        else if (dirtyness > 40) moveReduction.set(moveReduction.get() + 0.05);
-        else if (dirtyness > 20) moveReduction.set(moveReduction.get() + 0.025);
+    @WrapOperation(
+            method = "applyPenalties",
+            at = @At(value = "INVOKE", target = "Lnet/adinvas/prototype_pain/limbs/PlayerHealthData;applyAttributeModifier(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/ai/attributes/Attribute;Ljava/lang/String;DLnet/minecraft/world/entity/ai/attributes/AttributeModifier$Operation;)V"),
+            remap = false)
+    private void applyGunk(LivingEntity player, Attribute attribute, String name, double amount, AttributeModifier.Operation operation, Operation<Void> original) {
+
+        double gunkReduction = 0.0;
+        if (!isRobot) gunkReduction = 0.0;
+        else if (dirtyness > 80) gunkReduction = 0.05;
+        else if (dirtyness > 60) gunkReduction = 0.025;
+        else if (dirtyness > 40) gunkReduction = 0.0125;
+        else if (dirtyness > 20) gunkReduction = 0.0075;
+
+        original.call(player, attribute, name, amount-gunkReduction, operation);
     }
 
     @WrapMethod(method = "tickUpdate", remap = false)
@@ -79,6 +90,12 @@ public abstract class PlayerHealthDataMixin {
 
     @WrapMethod(method = "getBOOSTED_LIMB_HEAL_RATE", remap = false)
     public float getBOOSTED_LIMB_HEAL_RATE(Operation<Float> original) {
+        if (isRobot) return 0f;
+        return original.call();
+    }
+
+    @WrapMethod(method = "getINFECTION_CHANCE", remap = false)
+    public float getINFECTION_CHANCE(Operation<Float> original) {
         if (isRobot) return 0f;
         return original.call();
     }
