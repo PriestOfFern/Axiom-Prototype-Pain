@@ -55,7 +55,7 @@ public abstract class TemperatureMoodleMixin extends AbstractMoodleVisual {
                     componentList.add(Component.literal("Cold"));
                     componentList.add(Component.literal("Internals are cold. Operations are starting to slow down").withStyle(ChatFormatting.GRAY));
                 } else {
-                    componentList.add(Component.literal("Cold"));
+                    componentList.add(Component.literal("Warm"));
                     componentList.add(Component.literal("Internals are warm. Operations are starting to slow down").withStyle(ChatFormatting.GRAY));
                 }
                 break;
