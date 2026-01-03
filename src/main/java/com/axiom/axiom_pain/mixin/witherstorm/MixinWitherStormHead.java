@@ -15,6 +15,4 @@ public abstract class MixinWitherStormHead extends LivingEntity {
     protected MixinWitherStormHead(EntityType<? extends LivingEntity> p_20966_, Level p_20967_) {
         super(p_20966_, p_20967_);
     }
-
-    getBoundi
 }
