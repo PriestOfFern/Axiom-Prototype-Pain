@@ -3,6 +3,7 @@
   "minVersion": "0.8",
   "package": "com.axiom.axiom_pain.mixin",
   "compatibilityLevel": "JAVA_17",
+  "refmap": "axiom_pain.mixins.refmap.json",
   "mixins": [
     "balance.BoneWeldingItemMixin",
     "balance.LivingEntityMixin",

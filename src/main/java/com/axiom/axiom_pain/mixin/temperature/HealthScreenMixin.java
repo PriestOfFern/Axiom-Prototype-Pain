@@ -16,10 +16,10 @@ import toughasnails.temperature.TemperatureHelperImpl;
 
 @Mixin(HealthScreen.class)
 public class HealthScreenMixin {
-    @Shadow(remap = false)
+    @Shadow
     private HealthInfoBoxWidget healthbox;
 
-    @Inject(method = "tick", at = @At("RETURN"), remap = false)
+    @Inject(method = "tick", at = @At("RETURN"))
     public void tick(CallbackInfo ci) {
         Player viewer = Minecraft.getInstance().player;
         float temperature = AxiomTemperatureHelper.INSTANCE.levelToTemp(TemperatureHelper.getTemperatureForPlayer(viewer));

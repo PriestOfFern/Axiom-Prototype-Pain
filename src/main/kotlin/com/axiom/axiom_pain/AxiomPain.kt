@@ -6,11 +6,14 @@ import com.axiom.axiom_pain.init.AxiomParticles
 import com.axiom.axiom_pain.init.ItemRegistry
 import com.axiom.axiom_pain.keybind.KeyBindHandler.registerKeybindings
 import com.axiom.axiom_pain.moodles.AxiomMoodleController
+import glitchcore.event.player.PlayerEvent
+import net.adinvas.prototype_pain.PlayerHealthProvider
 import net.adinvas.prototype_pain.item.multi_tank.MultiTankFluidItem
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.ItemStack
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent
 import net.minecraftforge.event.TickEvent
+import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.ModLoadingContext
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.config.ModConfig
@@ -34,13 +37,13 @@ object AxiomPain {
         MOD_BUS.addListener(::onClientSetup)
         FORGE_BUS.addListener(::onClientTick)
         MOD_BUS.addListener(::buildContents)
-        MOD_BUS.addListener(AxiomParticles::registerParticles)
+
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, AxiomPainConfig.SPEC);
 
         AxiomMedicalFluids.register(MOD_BUS)
         ItemRegistry.register(MOD_BUS)
         AxiomParticleTypes.register(MOD_BUS)
-        AxiomMoodleController.register()
+
 
     }
 
@@ -61,10 +64,23 @@ object AxiomPain {
     private fun onClientSetup(event: FMLClientSetupEvent) {
         LOGGER.log(Level.INFO, "Initializing client... with Axiom Pain!")
         MOD_BUS.addListener(::registerKeybindings)
+        MOD_BUS.addListener(AxiomParticles::registerParticles)
+        AxiomMoodleController.register()
     }
 
     private fun onClientTick(event: TickEvent.ClientTickEvent) {
         BloodParticleRenderer.tick(event)
+    }
+
+    @SubscribeEvent
+    fun onPlayerCloned(event: net.minecraftforge.event.entity.player.PlayerEvent.Clone) {
+        if (event.isWasDeath()) {
+            event.getOriginal().getCapability(PlayerHealthProvider.PLAYER_HEALTH_DATA).ifPresent({ oldStore ->
+                event.getOriginal().getCapability(PlayerHealthProvider.PLAYER_HEALTH_DATA).ifPresent({ newStore ->
+                    newStore.copyFrom(oldStore)
+                })
+            })
+        }
     }
 
 }

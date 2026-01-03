@@ -19,7 +19,7 @@ import toughasnails.api.temperature.TemperatureHelper;
 @Mixin(PlayerHealthData.class)
 public class PlayerHealthDataMixin {
 
-    @Shadow(remap = false)
+    @Shadow
     private float temperature;
 
     @Shadow
@@ -32,9 +32,8 @@ public class PlayerHealthDataMixin {
 
     @WrapOperation(
             method = "handleFireDamage",
-            at = @At(value = "INVOKE", target = "Lnet/adinvas/prototype_pain/limbs/PlayerHealthData;applyBleedDamage(Lnet/adinvas/prototype_pain/limbs/Limb;FLnet/minecraft/world/entity/player/Player;)V"),
-            remap = false
-    )
+            at = @At(value = "INVOKE", target = "Lnet/adinvas/prototype_pain/limbs/PlayerHealthData;applyBleedDamage(Lnet/adinvas/prototype_pain/limbs/Limb;FLnet/minecraft/world/entity/player/Player;)V")
+            , remap = false)
     void applyBleedDamageFire(PlayerHealthData instance, Limb limb, float damage, Player player, Operation<Void> original) {
         System.out.println(damage);
     }

@@ -27,18 +27,18 @@ import java.util.Map;
 @Mixin(PlayerHealthData.class)
 public abstract class PlayerHealthDataMixin {
 
-    @Shadow(remap = false)
+    @Shadow
     private Map<Limb, LimbStatistics> limbStats;
 
-    @Shadow(remap = false)
+    @Shadow
     private double totalPain;
-    @Shadow(remap = false)
+    @Shadow
     private float Opioids;
-    @Shadow(remap = false)
+    @Shadow
     private float adrenaline;
-    @Shadow(remap = false)
+    @Shadow
     private float drug_addition;
-    @Shadow(remap = false)
+    @Shadow
     private float dirtyness;
 
     @Unique
@@ -56,14 +56,13 @@ public abstract class PlayerHealthDataMixin {
 
     @WrapMethod(method = "recalculateConsciousness", remap = false)
     void recalculateConsciousness(Operation<Void> original) {
-        this.totalPain = 0.0;
+        if (isRobot) this.totalPain = 0.0;
         original.call();
     }
 
     @WrapOperation(
             method = "applyPenalties",
-            at = @At(value = "INVOKE", target = "Lnet/adinvas/prototype_pain/limbs/PlayerHealthData;applyAttributeModifier(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/ai/attributes/Attribute;Ljava/lang/String;DLnet/minecraft/world/entity/ai/attributes/AttributeModifier$Operation;)V"),
-            remap = false)
+            at = @At(value = "INVOKE", target = "Lnet/adinvas/prototype_pain/limbs/PlayerHealthData;applyAttributeModifier(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/ai/attributes/Attribute;Ljava/lang/String;DLnet/minecraft/world/entity/ai/attributes/AttributeModifier$Operation;)V"), remap = false)
     private void applyGunk(LivingEntity player, Attribute attribute, String name, double amount, AttributeModifier.Operation operation, Operation<Void> original) {
 
         double gunkReduction = 0.0;

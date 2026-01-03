@@ -24,14 +24,13 @@ import java.util.List;
 @Mixin(TemperatureMoodle.class)
 public abstract class TemperatureMoodleMixin extends AbstractMoodleVisual {
 
-    @Shadow(remap = false)
+    @Shadow
     boolean low;
 
     @ModifyExpressionValue(
             method = "calculateStatus",
-            at = @At(value = "INVOKE", target = "Ljava/lang/Float;floatValue()F"),
-            remap = false
-    )
+            at = @At(value = "INVOKE", target = "Ljava/lang/Float;floatValue()F")
+            , remap = false)
     float calculateStatus(float original, Player player) {
         return AxiomTemperatureHelper.INSTANCE.levelToTemp(TemperatureHelper.getTemperatureForPlayer(player));
     }

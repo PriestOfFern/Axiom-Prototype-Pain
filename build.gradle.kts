@@ -27,7 +27,7 @@ plugins {
 }
 
 group = "com.axiom"
-version = "1.20-0.1.1"
+version = "1.20-0.1.2"
 
 val modid = "axiom_pain"
 val vendor = "axiom"
@@ -124,9 +124,12 @@ dependencies {
     implementation(fg.deobf("maven.modrinth:prototype-pain:2.7.2"))
     implementation(fg.deobf("maven.modrinth:tough-as-nails:9.2.0.171-forge"))
     implementation(fg.deobf("maven.modrinth:glitchcore:0.0.1.1-forge"))
+    implementation(fg.deobf("maven.modrinth:crackers-wither-storm-mod:4.2.1"))
+
     implementation("io.github.llamalad7:mixinextras-common:0.5.2")
     annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.2")
     implementation("io.github.llamalad7:mixinextras-forge:0.5.2")
+
 
 }
 
