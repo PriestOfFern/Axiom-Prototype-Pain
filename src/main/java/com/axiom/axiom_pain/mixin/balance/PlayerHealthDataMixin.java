@@ -14,6 +14,6 @@ public class PlayerHealthDataMixin {
 
     @WrapMethod(method = "handleAmputation", remap = false)
     boolean handleAmputation(Limb limb, float damage, float base_damage_treshhold, Player player, Operation<Boolean> original) {
-        return original.call(limb, damage, 50f, player);
+        return original.call(limb, damage, 40f, player);
     }
 }
