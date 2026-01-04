@@ -1,7 +1,5 @@
 package com.axiom.axiom_pain.mixin.balance;
 
-import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import net.adinvas.prototype_pain.PlayerHealthProvider;
 import net.adinvas.prototype_pain.item.INbtDrivenDurability;
 import net.adinvas.prototype_pain.item.usable.BoneWeldingItem;
@@ -10,15 +8,21 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 
+import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
 @Mixin(BoneWeldingItem.class)
 public abstract class BoneWeldingItemMixin implements INbtDrivenDurability {
 
-    @WrapMethod(method = "onMedicalUse", remap = false)
-    ItemStack setLimbFracture(Limb limb, ServerPlayer source, ServerPlayer target, ItemStack stack, Operation<ItemStack> original) {
+
+    @Overwrite(remap = false)
+    public ItemStack onMedicalUse(Limb limb, ServerPlayer source, ServerPlayer target, ItemStack stack) {
         target.getCapability(PlayerHealthProvider.PLAYER_HEALTH_DATA).ifPresent((h) -> {
             h.setLimbSkinHealth(limb, h.getLimbSkinHealth(limb) - 25.0F);
             h.setLimbMuscleHealth(limb, h.getLimbMuscleHealth(limb) - 26.0F);
-            h.setLimbFracture(limb, h.getLimbFracture(limb) * 0.15F);
+            h.setLimbFracture(limb, 0f);
             h.setLimbBleedRate(limb, h.getLimbBleedRate(limb) + 4E-4F);
             h.setLimbPain(limb, h.getLimbPain(limb) + 30.0F);
             h.setBloodViscosity(h.getBloodViscosity() + 2.0F);
