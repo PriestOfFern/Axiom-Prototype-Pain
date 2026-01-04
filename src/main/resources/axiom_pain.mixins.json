@@ -6,6 +6,7 @@
   "refmap": "axiom_pain.mixins.refmap.json",
   "mixins": [
     "balance.BoneWeldingItemMixin",
+    "balance.ClimateSamplerMixin",
     "balance.LivingEntityMixin",
     "balance.PlayerHealthDataMixin",
     "robot.BloodParticleTriggerProcedureMixin",

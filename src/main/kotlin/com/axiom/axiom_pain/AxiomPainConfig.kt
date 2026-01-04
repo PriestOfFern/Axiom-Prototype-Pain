@@ -11,6 +11,7 @@ object AxiomPainConfig {
 
     // This will hold the actual list of strings
     val ROBOT_USERNAMES: ForgeConfigSpec.ConfigValue<MutableList<out String>>
+    val TEMPERATURE_SHIFT: ForgeConfigSpec.ConfigValue<out Long>
 
     init {
         BUILDER.push("Robot Settings")
@@ -18,6 +19,10 @@ object AxiomPainConfig {
         ROBOT_USERNAMES = BUILDER
             .comment("A list of usernames that the mod will treat as 'Robots'")
             .defineList<String>("robotUsernames", mutableListOf<String>()) { obj: Any? -> obj is String }
+
+        TEMPERATURE_SHIFT = BUILDER
+            .comment("Long which is subtracted from the temperature. A value of 10000000 is roughly equivalent to a 0.1 float shift.")
+            .define("temperatureShift", 25000000L)
 
         BUILDER.pop()
         SPEC = BUILDER.build()
