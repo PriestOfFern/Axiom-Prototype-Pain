@@ -38,8 +38,6 @@ public class SubSpriteMixin {
             remap = false
     )
     public void blit(GuiGraphics instance, ResourceLocation p_283272_, int p_283605_, int p_281879_, float p_282809_, float p_282942_, int p_281922_, int p_282385_, int p_282596_, int p_281699_, Operation<Void> original) {
-        AxiomPain.INSTANCE.getLOGGER().debug(this.txt + " " + StatusSprites.BLEED.getResourceLocation());
-
         if (!this.txt.equals(StatusSprites.BLEED.getResourceLocation())) original.call(instance, p_283272_, p_283605_, p_281879_, p_282809_, p_282942_, p_281922_, p_282385_, p_282596_, p_281699_);
         else {
             Screen currentScreen = Minecraft.getInstance().screen;

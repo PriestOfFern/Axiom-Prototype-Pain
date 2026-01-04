@@ -72,15 +72,4 @@ object AxiomPain {
         BloodParticleRenderer.tick(event)
     }
 
-    @SubscribeEvent
-    fun onPlayerCloned(event: net.minecraftforge.event.entity.player.PlayerEvent.Clone) {
-        if (event.isWasDeath()) {
-            event.getOriginal().getCapability(PlayerHealthProvider.PLAYER_HEALTH_DATA).ifPresent({ oldStore ->
-                event.getOriginal().getCapability(PlayerHealthProvider.PLAYER_HEALTH_DATA).ifPresent({ newStore ->
-                    newStore.copyFrom(oldStore)
-                })
-            })
-        }
-    }
-
 }
