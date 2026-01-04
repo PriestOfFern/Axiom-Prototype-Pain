@@ -8,14 +8,17 @@
     "balance.BoneWeldingItemMixin",
     "balance.LivingEntityMixin",
     "balance.PlayerHealthDataMixin",
+    "robot.BloodParticleTriggerProcedureMixin",
     "robot.BruiseKitItemMixin",
     "robot.DirtynessMoodleMixin",
     "robot.PlayerHealthDataMixin",
+    "robot.SubSpriteMixin",
     "temperature.PlayerHealthDataMixin",
     "temperature.TemperatureHandlerMixin",
     "temperature.TemperatureHelperImplMixin"
   ],
   "client": [
+    "robot.HealthScreenAccessor",
     "temperature.HealthScreenMixin",
     "temperature.TemperatureMoodleMixin"
   ],

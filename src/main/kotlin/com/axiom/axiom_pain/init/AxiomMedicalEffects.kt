@@ -18,8 +18,8 @@ object AxiomMedicalEffects {
                 .ifPresent(NonNullConsumer { h: PlayerHealthData? ->
                     if (!AxiomPainConfig.isRobot(player)) h?.bloodVolume = h.bloodVolume + ml * 0.001f
                     else {
-                        player.addEffect(MobEffectInstance(MobEffects.CONFUSION, (1.0f * ml).toInt(), 1))
-                        player.addEffect(MobEffectInstance(MobEffects.POISON, (1.0f * ml).toInt(), 2))
+                        player.addEffect(MobEffectInstance(MobEffects.CONFUSION, (100*ml).toInt(), 1))
+                        player.addEffect(MobEffectInstance(MobEffects.POISON, (100*ml).toInt(), 2))
                     }
                 })
         }
@@ -31,8 +31,8 @@ object AxiomMedicalEffects {
                 .ifPresent(NonNullConsumer { h: PlayerHealthData? ->
                     if (AxiomPainConfig.isRobot(player)) h?.bloodVolume = h.bloodVolume + ml * 0.001f
                     else {
-                        player.addEffect(MobEffectInstance(MobEffects.CONFUSION, 100, 1))
-                        player.addEffect(MobEffectInstance(MobEffects.POISON, 100, 2))
+                        player.addEffect(MobEffectInstance(MobEffects.CONFUSION, (100*ml).toInt(), 1))
+                        player.addEffect(MobEffectInstance(MobEffects.POISON, (100*ml).toInt(), 2))
                     }
                 })
         }
