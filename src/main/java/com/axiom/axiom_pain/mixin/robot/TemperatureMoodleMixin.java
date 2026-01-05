@@ -1,4 +1,4 @@
-package com.axiom.axiom_pain.mixin.temperature;
+package com.axiom.axiom_pain.mixin.robot;
 
 import com.axiom.axiom_pain.AxiomPainConfig;
 import com.axiom.axiom_pain.AxiomTemperatureHelper;
@@ -6,12 +6,9 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import net.adinvas.prototype_pain.client.moodles.AbstractMoodleVisual;
-import net.adinvas.prototype_pain.client.moodles.MoodleStatus;
 import net.adinvas.prototype_pain.client.moodles.TemperatureMoodle;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
