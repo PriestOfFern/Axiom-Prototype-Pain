@@ -6,14 +6,13 @@ import com.axiom.axiom_pain.init.AxiomParticles
 import com.axiom.axiom_pain.init.ItemRegistry
 import com.axiom.axiom_pain.keybind.KeyBindHandler.registerKeybindings
 import com.axiom.axiom_pain.moodles.AxiomMoodleController
-import glitchcore.event.player.PlayerEvent
-import net.adinvas.prototype_pain.PlayerHealthProvider
+import net.adinvas.prototype_pain.item.INbtDrivenDurability
 import net.adinvas.prototype_pain.item.multi_tank.MultiTankFluidItem
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.level.ItemLike
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent
 import net.minecraftforge.event.TickEvent
-import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.ModLoadingContext
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.config.ModConfig
@@ -37,12 +36,14 @@ object AxiomPain {
         MOD_BUS.addListener(::onClientSetup)
         FORGE_BUS.addListener(::onClientTick)
         MOD_BUS.addListener(::buildContents)
+        MOD_BUS.addListener(AxiomParticles::registerParticles)
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, AxiomPainConfig.SPEC);
 
         AxiomMedicalFluids.register(MOD_BUS)
         ItemRegistry.register(MOD_BUS)
         AxiomParticleTypes.register(MOD_BUS)
+
 
 
     }
@@ -52,9 +53,11 @@ object AxiomPain {
         if (event.tabKey.location() == ResourceLocation.fromNamespaceAndPath("prototype_pain", "main")) {
             ItemRegistry.ITEMS.entries.forEach {
                 val stack: ItemStack = ItemStack(it.get())
-                if (it.get() is MultiTankFluidItem) {
-                    (it.get() as MultiTankFluidItem).setupDefault(stack)
-                }
+
+
+                (it.get() as? INbtDrivenDurability)?.setupDefaults(stack)
+                (it.get() as? MultiTankFluidItem)?.setupDefault(stack)
+
                 event.accept(stack)
             }
         }
@@ -64,7 +67,6 @@ object AxiomPain {
     private fun onClientSetup(event: FMLClientSetupEvent) {
         LOGGER.log(Level.INFO, "Initializing client... with Axiom Pain!")
         MOD_BUS.addListener(::registerKeybindings)
-        MOD_BUS.addListener(AxiomParticles::registerParticles)
         AxiomMoodleController.register()
     }
 
