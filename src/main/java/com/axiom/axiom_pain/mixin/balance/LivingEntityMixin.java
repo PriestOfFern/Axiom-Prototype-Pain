@@ -32,6 +32,6 @@ public abstract class LivingEntityMixin extends Entity {
 
         if (this.onGround()) return;
 
-        cir.setReturnValue(this.speed * 0.09f);
+        cir.setReturnValue(this.speed * 0.2f);
     }
 }

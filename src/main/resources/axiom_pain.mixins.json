@@ -19,7 +19,13 @@
     "temperature.TemperatureHelperImplMixin"
   ],
   "client": [
+    "robot.AmputationScreenAccessor",
+    "robot.BandageScreenAccessor",
+    "robot.CPRScreenAccessor",
+    "robot.DislocationScreenAccessor",
     "robot.HealthScreenAccessor",
+    "robot.InjectScreenAccessor",
+    "robot.ShrapnelScreenAccessor",
     "temperature.HealthScreenMixin",
     "temperature.TemperatureMoodleMixin"
   ],
