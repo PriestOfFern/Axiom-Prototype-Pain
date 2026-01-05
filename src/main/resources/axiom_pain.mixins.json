@@ -11,23 +11,25 @@
     "balance.PlayerHealthDataMixin",
     "robot.BloodParticleTriggerProcedureMixin",
     "robot.BruiseKitItemMixin",
-    "robot.DirtynessMoodleMixin",
     "robot.PlayerHealthDataMixin",
-    "robot.SubSpriteMixin",
     "temperature.PlayerHealthDataMixin",
     "temperature.TemperatureHandlerMixin",
     "temperature.TemperatureHelperImplMixin"
   ],
   "client": [
     "robot.AmputationScreenAccessor",
+    "robot.BandageObjectAccessor",
     "robot.BandageScreenAccessor",
     "robot.CPRScreenAccessor",
+    "robot.DirtynessMoodleMixin",
     "robot.DislocationScreenAccessor",
     "robot.HealthScreenAccessor",
     "robot.InjectScreenAccessor",
     "robot.ShrapnelScreenAccessor",
+    "robot.SubSpriteMixin",
     "temperature.HealthScreenMixin",
-    "temperature.TemperatureMoodleMixin"
+    "temperature.TemperatureMoodleMixin",
+    "robot.BandageObjectMixin"
   ],
   "injectors": {
     "defaultRequire": 1

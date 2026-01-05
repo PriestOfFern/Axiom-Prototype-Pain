@@ -5,7 +5,7 @@ package com.axiom.axiom_pain.init
 import com.axiom.axiom_pain.AxiomPain.MODID
 import com.axiom.axiom_pain.items.BloodBagItem
 import com.axiom.axiom_pain.items.OilBagItem
-import net.adinvas.prototype_pain.item.ModCreativeTab
+import com.axiom.axiom_pain.items.repairkit.RepairKit
 import net.minecraft.world.item.Item
 import net.minecraftforge.eventbus.api.IEventBus
 import net.minecraftforge.registries.DeferredRegister
@@ -25,4 +25,5 @@ object ItemRegistry {
 
     val BLOOD_BAG = ITEMS.register("blood_bag") { BloodBagItem() }
     val OIL_BAG = ITEMS.register("oil_bag") { OilBagItem() }
+    val REPAIR_KIT = ITEMS.register("repair_kit") { RepairKit((Item.Properties()).stacksTo(1)) }
 }

@@ -1,5 +1,6 @@
 package com.axiom.axiom_pain.mixin.balance;
 
+import com.axiom.axiom_pain.AxiomPain;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -23,15 +24,17 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(method = "getFrictionInfluencedSpeed", at = @At("TAIL"), cancellable = true)
     private void getFrictionInfluencedSpeed(float p_21331_, CallbackInfoReturnable<Float> cir) {
-        float original = cir.getReturnValue();
         if ((Object)this instanceof Player player) {
-            if (player.getAbilities().flying) {
-                return;
-            }
-        }
+            if (player.getAbilities().flying) return;
+
+        } else return;
 
         if (this.onGround()) return;
+        if (this.speed > 0.09) return;
 
-        cir.setReturnValue(this.speed * 0.2f);
+
+        cir.setReturnValue(this.speed * 0.02f);
     }
+
+
 }
