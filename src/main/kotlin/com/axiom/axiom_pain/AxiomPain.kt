@@ -9,10 +9,15 @@ import com.axiom.axiom_pain.moodles.AxiomMoodleController
 import net.adinvas.prototype_pain.item.INbtDrivenDurability
 import net.adinvas.prototype_pain.item.multi_tank.MultiTankFluidItem
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.damagesource.DamageSources
+import net.minecraft.world.damagesource.DamageType
+import net.minecraft.world.damagesource.DamageTypes
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.ItemLike
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent
 import net.minecraftforge.event.TickEvent
+import net.minecraftforge.event.entity.living.LivingHurtEvent
+import net.minecraftforge.eventbus.api.EventPriority
 import net.minecraftforge.fml.ModLoadingContext
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.config.ModConfig

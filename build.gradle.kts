@@ -122,7 +122,7 @@ dependencies {
     implementation("thedarkcolour:kotlinforforge:4.12.0")
     implementation(fg.deobf("curse.maven:blood-bits-984445:7353388"))
     implementation(fg.deobf("maven.modrinth:prototype-pain:2.7.2"))
-    implementation(fg.deobf("maven.modrinth:tough-as-nails:9.2.0.171-forge"))
+    implementation(fg.deobf("maven.modrinth:homeostatic:1.20.1-2.9.16.2-FORGE"))
     implementation(fg.deobf("maven.modrinth:glitchcore:0.0.1.1-forge"))
     implementation(fg.deobf("maven.modrinth:crackers-wither-storm-mod:4.2.1"))
 

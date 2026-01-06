@@ -1,8 +1,6 @@
 package com.axiom.axiom_pain.mixin.robot;
 
 import com.axiom.axiom_pain.AxiomPainConfig;
-import com.axiom.axiom_pain.AxiomTemperatureHelper;
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import net.adinvas.prototype_pain.client.moodles.AbstractMoodleVisual;
@@ -12,8 +10,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import toughasnails.api.temperature.TemperatureHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,14 +19,6 @@ public abstract class TemperatureMoodleMixin extends AbstractMoodleVisual {
 
     @Shadow
     boolean low;
-
-    @ModifyExpressionValue(
-            method = "calculateStatus",
-            at = @At(value = "INVOKE", target = "Ljava/lang/Float;floatValue()F")
-            , remap = false)
-    float calculateStatus(float original, Player player) {
-        return AxiomTemperatureHelper.INSTANCE.levelToTemp(TemperatureHelper.getTemperatureForPlayer(player));
-    }
 
     @WrapMethod(method = "getTooltip", remap = false)
     List<Component> getTooltip(Player player, Operation<List<Component>> original) {

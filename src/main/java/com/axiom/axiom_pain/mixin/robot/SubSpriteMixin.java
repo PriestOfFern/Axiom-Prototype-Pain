@@ -2,16 +2,11 @@ package com.axiom.axiom_pain.mixin.robot;
 
 //This is the worst thing i have ever written
 
-import com.axiom.axiom_pain.AxiomPain;
 import com.axiom.axiom_pain.AxiomPainConfig;
-import com.axiom.axiom_pain.mixin.temperature.HealthScreenMixin;
-import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import net.adinvas.prototype_pain.client.gui.HealthScreen;
 import net.adinvas.prototype_pain.client.gui.StatusSprites;
 import net.adinvas.prototype_pain.client.gui.SubSprite;
-import net.adinvas.prototype_pain.client.gui.minigames.BandageMinigameScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -19,7 +14,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 

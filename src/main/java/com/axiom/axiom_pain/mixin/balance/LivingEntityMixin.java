@@ -20,7 +20,9 @@ public abstract class LivingEntityMixin extends Entity {
     }
 
     @Shadow
-    private float speed;
+    public float getSpeed() {
+        return 0;
+    }
 
     @Inject(method = "getFrictionInfluencedSpeed", at = @At("TAIL"), cancellable = true)
     private void getFrictionInfluencedSpeed(float p_21331_, CallbackInfoReturnable<Float> cir) {
@@ -30,10 +32,10 @@ public abstract class LivingEntityMixin extends Entity {
         } else return;
 
         if (this.onGround()) return;
-        if (this.speed > 0.09) return;
+        if (this.getSpeed() > 0.09) return;
 
 
-        cir.setReturnValue(this.speed * 0.02f);
+        cir.setReturnValue(this.getSpeed() * 0.02f);
     }
 
 

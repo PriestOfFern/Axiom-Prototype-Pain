@@ -20,6 +20,7 @@ public class BloodParticleTriggerProcedureMixin {
 
     @WrapMethod(method = "execute(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/LevelAccessor;DDDLnet/minecraft/world/entity/Entity;D)V", remap = false)
     private static void execute(Event event, LevelAccessor world, double x, double y, double z, Entity entity, double amount, Operation<Void> original) {
+
         if (entity instanceof Player player && AxiomPainConfig.INSTANCE.isRobot(player)) {
             if (world instanceof ServerLevel _level) {
                 _level.sendParticles( AxiomParticleTypes.INSTANCE.getOILSPASH().get(), x, y + (double)(entity.getBbHeight() / 2.0F), z, (int)((Double) BloodBitsConfigConfiguration.AMOUNT.get() * amount), (double)(entity.getBbWidth() / 2.0F), (double)(entity.getBbHeight() / 2.0F), (double)(entity.getBbWidth() / 2.0F), 0.2);
