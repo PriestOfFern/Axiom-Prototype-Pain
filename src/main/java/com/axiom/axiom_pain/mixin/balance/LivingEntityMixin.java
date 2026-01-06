@@ -31,8 +31,10 @@ public abstract class LivingEntityMixin extends Entity {
 
         } else return;
 
+        if ((Object)this instanceof Player) AxiomPain.INSTANCE.getLOGGER().debug(this.getSpeed());
+
         if (this.onGround()) return;
-        if (this.getSpeed() > 0.09) return;
+        if (this.getSpeed() >= 0.1) return;
 
 
         cir.setReturnValue(this.getSpeed() * 0.02f);

@@ -9,8 +9,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 
 
-@Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = arrayOf(Dist.DEDICATED_SERVER))
-class AxiomEvents {
+@Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = [Dist.DEDICATED_SERVER])
+object AxiomEvents {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     fun cancelFreezing(event: LivingHurtEvent) {
         if (event.isCancelable) event.isCanceled = true
