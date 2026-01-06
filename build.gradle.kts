@@ -130,6 +130,7 @@ dependencies {
     annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.2")
     implementation("io.github.llamalad7:mixinextras-forge:0.5.2")
 
+    implementation("org.valkyrienskies:valkyrienskies-120-forge:2.4.6+fb5dc80214")
 
 }
 
