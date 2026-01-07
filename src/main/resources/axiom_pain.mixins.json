@@ -13,7 +13,9 @@
     "robot.BloodParticleTriggerProcedureMixin",
     "robot.BruiseKitItemMixin",
     "robot.PlayerHealthDataMixin",
-    "temperature.PlayerHealthDataMixin"
+    "temperature.EnvironmentMixin",
+    "temperature.PlayerHealthDataMixin",
+    "temperature.VecMathMixin"
   ],
   "client": [
     "robot.AmputationScreenAccessor",

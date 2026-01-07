@@ -109,6 +109,14 @@ repositories {
             includeGroup("maven.modrinth")
         }
     }
+    maven {
+        name = "Valkyrien Skies Internal"
+        url = uri("https://maven.valkyrienskies.org")
+        content {
+            includeGroup("org.valkyrienskies")
+            includeGroup("org.valkyrienskies.core")
+        }
+    }
 
 }
 
@@ -120,17 +128,31 @@ dependencies {
     minecraft("net.minecraftforge:forge:$minecraftVersion-$forgeVersion")
     annotationProcessor("org.spongepowered:mixin:0.8.5:processor")
     implementation("thedarkcolour:kotlinforforge:4.12.0")
-    implementation(fg.deobf("curse.maven:blood-bits-984445:7353388"))
-    implementation(fg.deobf("maven.modrinth:prototype-pain:2.7.2"))
-    implementation(fg.deobf("maven.modrinth:homeostatic:1.20.1-2.9.16.2-FORGE"))
-    implementation(fg.deobf("maven.modrinth:glitchcore:0.0.1.1-forge"))
-    implementation(fg.deobf("maven.modrinth:crackers-wither-storm-mod:4.2.1"))
+    api(fg.deobf("curse.maven:blood-bits-984445:7353388"))
+    api(fg.deobf("maven.modrinth:prototype-pain:2.7.2"))
+    api(fg.deobf("maven.modrinth:homeostatic:1.20.1-2.9.16.2-FORGE"))
+    api(fg.deobf("maven.modrinth:glitchcore:0.0.1.1-forge"))
+    api(fg.deobf("maven.modrinth:crackers-wither-storm-mod:4.2.1"))
 
     implementation("io.github.llamalad7:mixinextras-common:0.5.2")
     annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.2")
     implementation("io.github.llamalad7:mixinextras-forge:0.5.2")
 
-    implementation("org.valkyrienskies:valkyrienskies-120-forge:2.4.6+fb5dc80214")
+    api(fg.deobf("curse.maven:valkyrien-skies-258371:7418457"))
+
+    api("org.valkyrienskies.core:api:1.1.0+a5203f1d01") {
+        isTransitive = false
+        exclude(group = "org.joml", module = "")
+    }
+    api("org.valkyrienskies.core:util:1.1.0+a5203f1d01") {
+        isTransitive = false
+        exclude(group = "org.joml", module = "")
+    }
+    api("org.valkyrienskies.core:internal:1.1.0+a5203f1d01") {
+        isTransitive = false
+        exclude(group = "org.joml", module = "")
+    }
+
 
 }
 

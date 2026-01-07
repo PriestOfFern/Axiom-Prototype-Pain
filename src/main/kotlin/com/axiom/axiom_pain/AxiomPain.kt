@@ -9,15 +9,11 @@ import com.axiom.axiom_pain.moodles.AxiomMoodleController
 import net.adinvas.prototype_pain.item.INbtDrivenDurability
 import net.adinvas.prototype_pain.item.multi_tank.MultiTankFluidItem
 import net.minecraft.resources.ResourceLocation
-import net.minecraft.world.damagesource.DamageSources
-import net.minecraft.world.damagesource.DamageType
-import net.minecraft.world.damagesource.DamageTypes
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.level.ItemLike
+import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent
 import net.minecraftforge.event.TickEvent
-import net.minecraftforge.event.entity.living.LivingHurtEvent
-import net.minecraftforge.eventbus.api.EventPriority
+import net.minecraftforge.fml.DistExecutor
 import net.minecraftforge.fml.ModLoadingContext
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.config.ModConfig
@@ -27,6 +23,7 @@ import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import thedarkcolour.kotlinforforge.forge.FORGE_BUS
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
+import java.util.function.Supplier
 
 
 @Mod("axiom_pain")
@@ -41,7 +38,7 @@ object AxiomPain {
         MOD_BUS.addListener(::onClientSetup)
         FORGE_BUS.addListener(::onClientTick)
         MOD_BUS.addListener(::buildContents)
-        MOD_BUS.addListener(AxiomParticles::registerParticles)
+
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, AxiomPainConfig.SPEC);
 
@@ -49,7 +46,11 @@ object AxiomPain {
         ItemRegistry.register(MOD_BUS)
         AxiomParticleTypes.register(MOD_BUS)
 
-
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, Supplier {
+            Runnable {
+                MOD_BUS.addListener(AxiomParticles::registerParticles)
+            }
+        })
 
     }
 

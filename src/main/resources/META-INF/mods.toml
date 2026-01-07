@@ -32,3 +32,10 @@ mandatory = true
 versionRange = "[2.2.0,)"
 ordering = "AFTER"
 side = "BOTH"
+
+[[dependencies.axiom_pain]]
+modId = "valkyrienskies"
+mandatory = true
+versionRange = "[2.4.0,)"
+ordering = "AFTER"
+side = "BOTH"
