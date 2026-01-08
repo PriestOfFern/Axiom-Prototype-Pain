@@ -1,6 +1,7 @@
 package com.axiom.axiom_pain.mixin.temperature;
 
 import com.axiom.axiom_pain.AxiomPain;
+import com.axiom.axiom_pain.util.ITransformMixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import homeostatic.common.temperature.Environment;
@@ -17,7 +18,7 @@ import org.valkyrienskies.mod.common.util.IEntityDraggingInformationProvider;
 
 
 @Mixin(Environment.class)
-public class EnvironmentMixin {
+public class EnvironmentMixin implements ITransformMixin {
 
     @WrapOperation(
             method = "get",
@@ -25,39 +26,20 @@ public class EnvironmentMixin {
             remap = true
     )
     private static BlockPos getBlockPos(ServerPlayer instance, Operation<BlockPos> original) {
-        BlockPos pos = original.call(instance);
+        Vector3d transformed = ITransformMixin.Companion.transformPlayer(instance);
+        if (transformed == null) return original.call(instance);
 
-        EntityDraggingInformation dragInfo = ((IEntityDraggingInformationProvider) instance).getDraggingInformation();
-
-        if (!dragInfo.isEntityBeingDraggedByAShip()) return pos;
-        Long id = dragInfo.getLastShipStoodOn();
-        AxiomPain.INSTANCE.getLOGGER().debug(id);
-        if (id == null) return pos;
-        LoadedShip ship = VSGameUtilsKt.getShipObjectWorld(instance.level()).getLoadedShips().getById(id);
-        if (ship == null) return pos;
-        Vector3d newPos = ship.getTransform().getToModel().transformPosition(new Vector3d(pos.getX(), pos.getY(), pos.getZ()));
-        AxiomPain.INSTANCE.getLOGGER().debug(newPos);
-        return new BlockPos((int) newPos.x, (int) newPos.y, (int) newPos.z);
+        return new BlockPos((int) transformed.x, (int) transformed.y, (int) transformed.z);
     }
 
     @WrapOperation(
             method = "get",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerPlayer;getEyePosition(F)Lnet/minecraft/world/phys/Vec3;"),
-            remap = true
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerPlayer;getEyePosition(F)Lnet/minecraft/world/phys/Vec3;")
     )
     private static Vec3 getEyePos(ServerPlayer instance, float v, Operation<Vec3> original) {
-        Vec3 pos = original.call(instance, v);
+        Vector3d transformed = ITransformMixin.Companion.transformPlayer(instance);
+        if (transformed == null) return original.call(instance, v);
 
-        EntityDraggingInformation dragInfo = ((IEntityDraggingInformationProvider) instance).getDraggingInformation();
-
-        if (!dragInfo.isEntityBeingDraggedByAShip()) return pos;
-        Long id = dragInfo.getLastShipStoodOn();
-        AxiomPain.INSTANCE.getLOGGER().debug(id);
-        if (id == null) return pos;
-        LoadedShip ship = VSGameUtilsKt.getShipObjectWorld(instance.level()).getLoadedShips().getById(id);
-        if (ship == null) return pos;
-        Vector3d newPos = ship.getTransform().getToModel().transformPosition(new Vector3d(pos.x, pos.y, pos.z));
-        AxiomPain.INSTANCE.getLOGGER().debug(newPos);
-        return new Vec3((int) newPos.x, (int) newPos.y, (int) newPos.z);
+        return new Vec3(transformed.x, transformed.y, transformed.z);
     }
 }
