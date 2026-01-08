@@ -22,7 +22,7 @@ public class EnvironmentMixin {
     @WrapOperation(
             method = "get",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerPlayer;blockPosition()Lnet/minecraft/core/BlockPos;"),
-            remap = false
+            remap = true
     )
     private static BlockPos getBlockPos(ServerPlayer instance, Operation<BlockPos> original) {
         BlockPos pos = original.call(instance);
@@ -34,6 +34,7 @@ public class EnvironmentMixin {
         AxiomPain.INSTANCE.getLOGGER().debug(id);
         if (id == null) return pos;
         LoadedShip ship = VSGameUtilsKt.getShipObjectWorld(instance.level()).getLoadedShips().getById(id);
+        if (ship == null) return pos;
         Vector3d newPos = ship.getTransform().getToModel().transformPosition(new Vector3d(pos.getX(), pos.getY(), pos.getZ()));
         AxiomPain.INSTANCE.getLOGGER().debug(newPos);
         return new BlockPos((int) newPos.x, (int) newPos.y, (int) newPos.z);
@@ -42,7 +43,7 @@ public class EnvironmentMixin {
     @WrapOperation(
             method = "get",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerPlayer;getEyePosition(F)Lnet/minecraft/world/phys/Vec3;"),
-            remap = false
+            remap = true
     )
     private static Vec3 getEyePos(ServerPlayer instance, float v, Operation<Vec3> original) {
         Vec3 pos = original.call(instance, v);
@@ -54,6 +55,7 @@ public class EnvironmentMixin {
         AxiomPain.INSTANCE.getLOGGER().debug(id);
         if (id == null) return pos;
         LoadedShip ship = VSGameUtilsKt.getShipObjectWorld(instance.level()).getLoadedShips().getById(id);
+        if (ship == null) return pos;
         Vector3d newPos = ship.getTransform().getToModel().transformPosition(new Vector3d(pos.x, pos.y, pos.z));
         AxiomPain.INSTANCE.getLOGGER().debug(newPos);
         return new Vec3((int) newPos.x, (int) newPos.y, (int) newPos.z);

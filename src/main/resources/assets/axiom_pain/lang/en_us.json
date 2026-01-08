@@ -1,5 +1,9 @@
 {
   "itemGroup.examplemod.exampletab": "Example Mod",
-  "item.examplemod.sad_obsidian_maker": "Sad Obsidian Maker",
+  "item.axiom_pain.blood_bag": "Blood bag",
+  "item.axiom_pain.oil_bag": "Oil bag",
+  "item.axiom_pain.repair_kit": "Repair kit",
+  "medical_fluid.prototype_pain.blood.description": "Blood",
+  "medical_fluid.prototype_pain.oil.description": "Oil",
   "block.examplemod.example_block": "Example Block"
 }

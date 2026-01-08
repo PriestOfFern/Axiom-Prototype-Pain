@@ -30,7 +30,7 @@ class GunkMoodle : AbstractMoodleVisual() {
     }
 
     override fun renderIcon(ms: GuiGraphics, partialTicks: Float, x: Int, y: Int): ResourceLocation {
-        var tex = ResourceLocation.fromNamespaceAndPath("prototype_pain", "textures/gui/moodles/temphigh.png")
+        var tex = ResourceLocation.fromNamespaceAndPath("axiom_pain", "textures/gui/icons/gunkmoodle.png")
 
         ms.blit(tex, x, y, 0.0f, 0.0f, 16, 16, 16, 16)
         return tex

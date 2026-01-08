@@ -24,11 +24,13 @@
     "robot.BandageScreenAccessor",
     "robot.CPRScreenAccessor",
     "robot.DirtynessMoodleMixin",
+    "robot.DislocationMinigameMixin",
     "robot.DislocationScreenAccessor",
     "robot.HealthScreenAccessor",
     "robot.InjectScreenAccessor",
     "robot.ShrapnelScreenAccessor",
-    "robot.SubSpriteMixin"
+    "robot.SubSpriteMixin",
+    "robot.BoneObjectMixin"
   ],
   "injectors": {
     "defaultRequire": 1
