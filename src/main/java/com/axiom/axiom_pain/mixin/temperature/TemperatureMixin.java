@@ -12,8 +12,7 @@ public class TemperatureMixin {
 
     @WrapOperation(
             method = "checkTemperatureLevel",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;setTicksFrozen(I)V"),
-            remap = false
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;setTicksFrozen(I)V")
     )
     void disableFreezing(Player instance, int i, Operation<Void> original) {}
 }

@@ -27,7 +27,7 @@ plugins {
 }
 
 group = "com.axiom"
-version = "1.20-0.1.8"
+version = "1.20-0.1.9"
 
 val modid = "axiom_pain"
 val vendor = "axiom"

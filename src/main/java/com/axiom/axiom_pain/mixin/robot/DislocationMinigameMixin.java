@@ -38,7 +38,7 @@ public abstract class DislocationMinigameMixin extends Screen  {
         super(p_96550_);
     }
 
-    @WrapMethod(method = "render", remap = false)
+    @WrapMethod(method = "render")
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks, Operation<Void> original) {
         if (!AxiomPainConfig.INSTANCE.isRobot(target)) {
             original.call(guiGraphics, mouseX, mouseY, partialTicks);
